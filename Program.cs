@@ -7,7 +7,8 @@ namespace Misc
         public static void Main(string[] args)
         {
           QuickS.RunQuickSort();
-          Console.ReadLine();
+          
+          LinkL.RunLinkLists();
 
         }
    }
