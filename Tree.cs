@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 public class Node
 {
@@ -51,6 +52,26 @@ public class Tree
     list.Add(root.nodeValue);
     Order(root.right, list);
   }
+  public static List<char> Level (Node root)
+  {
+    List<char> listOfNodes = new List<char>();
+    Queue queueOfNodes = new Queue();
+    queueOfNodes.Enqueue(root);
+    while (queueOfNodes.Count > 0)
+    {
+      Node curr = (Node)queueOfNodes.Dequeue();
+      listOfNodes.Add(curr.nodeValue);
+      if (curr.left != null)
+      {
+        queueOfNodes.Enqueue(curr.left);
+      }
+      if (curr.right != null)
+      {
+        queueOfNodes.Enqueue(curr.right);
+      }
+    }
+    return listOfNodes;
+  }
   public static void Mirror(Node root)
   {
     if (root == null) return;
@@ -85,6 +106,15 @@ public static class TreeTest
     Tree.Mirror(treeRoot);
     var listMirrored = Tree.InOrder(treeRoot);
     foreach(char item in listMirrored)
+    {
+      Console.Write(item + " ");
+    }
+    Console.WriteLine();
+
+    Console.WriteLine("Level tree traversal");
+    var treeLevelTest = new Tree(new char[] {'a','b','c','d','e','f','g','i','h'});
+    var listLevelTest = Tree.Level(treeLevelTest.root);
+    foreach(char item in listLevelTest)
     {
       Console.Write(item + " ");
     }
